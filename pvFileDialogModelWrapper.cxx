@@ -15,7 +15,6 @@ class pvFileDialogModelWrapper::pvFileDialogModelWrapperInternal
     pvFileDialogModelWrapperInternal();
     ~pvFileDialogModelWrapperInternal();
 
-//    pqFileDialog* FileDialog;
     QDialog *FileDialog;
     pqSessionFileDialogModel *FileDialogModel;
 };
@@ -23,12 +22,7 @@ class pvFileDialogModelWrapper::pvFileDialogModelWrapperInternal
 
 pvFileDialogModelWrapper::pvFileDialogModelWrapperInternal::pvFileDialogModelWrapperInternal()
 {
-  qDebug() << "Creating dialog";
-// this->FileDialog = new pqFileDialog(0, 0);
   this->FileDialog = new QDialog();
-
-  std::cerr << "vtkProcessModule::GetProcessModule() "
-            << vtkProcessModule::GetProcessModule() << std::endl;
 
   vtkSMSession *activeSession = NULL;
   vtkProcessModule *processModule = vtkProcessModule::GetProcessModule();
@@ -36,8 +30,10 @@ pvFileDialogModelWrapper::pvFileDialogModelWrapperInternal::pvFileDialogModelWra
   if(processModule)
     {
     activeSession =
-      vtkSMSession::SafeDownCast(vtkProcessModule::GetProcessModule()->GetActiveSession());
+      vtkSMSession::SafeDownCast(vtkProcessModule::GetProcessModule()->GetSession());
     }
+
+  qDebug() << "Active session: " << activeSession;
 
   this->FileDialogModel = new pqSessionFileDialogModel(activeSession);
 }

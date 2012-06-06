@@ -112,9 +112,8 @@ include_directories(
   ${QT_INCLUDE_DIR}
   ${QT_INCLUDE_DIR}/QtCore
   ${QT_INCLUDE_DIR}/QtGui
-  ${PV_FILE_DIALOG_MODEL_INCLUDE}
 )
 
 add_library(pvFileDialogModelWrapper ${outputs})
 set_target_properties(pvFileDialogModelWrapper PROPERTIES PREFIX "")
-target_link_libraries(pvFileDialogModelWrapper ${PV_FILE_DIALOG_MODEL_LIB} )
+target_link_libraries(pvFileDialogModelWrapper pvFileDialogModel)
