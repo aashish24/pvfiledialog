@@ -1,4 +1,4 @@
-// Define the SIP wrapper to the hello library.
+// Define the SIP wrapper for pvFileDialogModel
 
 %Module pvFileDialogModelWrapper
 
