@@ -129,36 +129,8 @@
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
-      <widget class="QListView" name="Favorites">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-         <horstretch>1</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
-      <widget class="QListView" name="Recent">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-         <horstretch>1</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QTreeView" name="Files">
@@ -195,13 +167,6 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>Files of type:</string>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="2">
           <widget class="QPushButton" name="Cancel">
            <property name="text">
@@ -219,7 +184,6 @@
  </widget>
  <tabstops>
   <tabstop>FileName</tabstop>
-  <tabstop>FileType</tabstop>
   <tabstop>OK</tabstop>
   <tabstop>Cancel</tabstop>
   <tabstop>Parents</tabstop>
@@ -227,7 +191,6 @@
   <tabstop>NavigateForward</tabstop>
   <tabstop>NavigateUp</tabstop>
   <tabstop>CreateFolder</tabstop>
-  <tabstop>Favorites</tabstop>
   <tabstop>Files</tabstop>
  </tabstops>
  <resources/>
