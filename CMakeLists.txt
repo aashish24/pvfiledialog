@@ -117,3 +117,9 @@ include_directories(
 add_library(pvFileDialogModelWrapper ${outputs})
 set_target_properties(pvFileDialogModelWrapper PROPERTIES PREFIX "")
 target_link_libraries(pvFileDialogModelWrapper pvFileDialogModel)
+
+install(TARGETS pvFileDialogModel pvFileDialogModelWrapper
+  RUNTIME DESTINATION bin
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+)
