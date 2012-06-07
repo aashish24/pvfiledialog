@@ -8,6 +8,10 @@ SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake)
 # Only build shared library
 set(BUILD_SHARED_LIBS ON)
 
+# Python libraries are required
+set(Python_ADDITIONAL_VERSIONS 2.6 2.7)
+find_package(PythonLibs)
+
 # ParaView is required
 find_package(ParaView REQUIRED)
 
@@ -108,6 +112,7 @@ add_custom_command(OUTPUT
 
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
+  ${PYTHON_INCLUDE_DIRS}
   ${SIP_INCLUDE_DIR}
   ${QT_INCLUDE_DIR}
   ${QT_INCLUDE_DIR}/QtCore
