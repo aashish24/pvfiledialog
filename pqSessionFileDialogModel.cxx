@@ -235,6 +235,7 @@ private:
 /////////////////////////////////////////////////////////////////////////
 // pqSessionFileDialogModel::Implementation
 
+#include <QDebug>
 class pqSessionFileDialogModel::pqImplementation
 {
 public:
@@ -274,6 +275,8 @@ public:
     // current path
     vtkPVFileInformation* info = this->GetData(false, "", ".", false);
     this->CurrentPath = info->GetFullPath();
+  
+    qDebug() << "Current path: " << this->CurrentPath;
   }
 
   ~pqImplementation()
@@ -537,6 +540,7 @@ vtkSMSession* pqSessionFileDialogModel::session() const
 
 void pqSessionFileDialogModel::setCurrentPath(const QString& Path)
 {
+  qDebug() << "path " << Path;
   QString cPath = this->Implementation->cleanPath(Path);
   vtkPVFileInformation* info;
   info = this->Implementation->GetData(true, cPath, false);

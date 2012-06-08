@@ -2,6 +2,8 @@
 #include <QModelIndex>
 #include <QObject>
 
+#include <string>
+
 class pvFileDialogModelWrapper : public QObject
 {
   Q_OBJECT
@@ -10,16 +12,16 @@ public:
   explicit pvFileDialogModelWrapper(QWidget *parent = 0);
   ~pvFileDialogModelWrapper();
 
-  QString getCurrentPath();
-  void setCurrentPath(QString);
+  const char* getCurrentPath();
+  void setCurrentPath(const char*);
 
-  QString absoluteFilePath(const QString&);
+  const char* absoluteFilePath(const char*);
 
   QStringList getFilePaths(const QModelIndex&);
 
   QAbstractItemModel* getModel();
 
-  bool dirExists(const QString &dir, QString &fullpath);
+  bool dirExists(const char *dir, const char *fullpath);
 
 
 private:

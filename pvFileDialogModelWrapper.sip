@@ -3,6 +3,7 @@
 %Module pvFileDialogModelWrapper
 
 %Import QtGui/QtGuimod.sip
+%Import QtCore/QtCoremod.sip
 
 class pvFileDialogModelWrapper : QObject {
 
@@ -13,15 +14,15 @@ class pvFileDialogModelWrapper : QObject {
 public:
     pvFileDialogModelWrapper(QWidget *parent /TransferThis/ = 0);
 
-    QString getCurrentPath();
-    void setCurrentPath(QString);
+    const char* getCurrentPath();
+    void setCurrentPath(const char*);
 
     QAbstractItemModel* getModel();
 
-    QString absoluteFilePath(const QString&);
+    const char* absoluteFilePath(const char *);
     QStringList getFilePaths(const QModelIndex&);
 
-    bool dirExists(const QString &dir, QString &fullpath);
+    bool dirExists(const char *dir, const char *fullpath);
 
 private:
     pvFileDialogModelWrapper(const pvFileDialogModelWrapper &);

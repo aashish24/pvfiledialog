@@ -36,6 +36,8 @@ pvFileDialogModelWrapper::pvFileDialogModelWrapperInternal::pvFileDialogModelWra
   qDebug() << "Active session: " << activeSession;
 
   this->FileDialogModel = new pqSessionFileDialogModel(activeSession);
+  
+  std::cout << this->FileDialogModel << std::endl;
 }
 
 
@@ -56,21 +58,23 @@ pvFileDialogModelWrapper::~pvFileDialogModelWrapper()
 }
 
 
-QString pvFileDialogModelWrapper::getCurrentPath()
+const char* pvFileDialogModelWrapper::getCurrentPath()
 {
-  return this->Implementation->FileDialogModel->getCurrentPath();
+  return this->Implementation->FileDialogModel->getCurrentPath().toStdString().c_str();
 }
 
 
-void pvFileDialogModelWrapper::setCurrentPath(QString path)
+void pvFileDialogModelWrapper::setCurrentPath(const char* path)
 {
-  this->Implementation->FileDialogModel->setCurrentPath(path);
+  qDebug() << "Current path is: " << path;
+  this->Implementation->FileDialogModel->setCurrentPath(QString(path));
 }
 
 
-QString pvFileDialogModelWrapper::absoluteFilePath(const QString &path)
+const char* pvFileDialogModelWrapper::absoluteFilePath(const char *path)
 {
- return this->Implementation->FileDialogModel->absoluteFilePath(path);
+  QString tmpPath = QString(path);
+ return this->Implementation->FileDialogModel->absoluteFilePath(tmpPath).toStdString().c_str();
 }
 
 
@@ -86,8 +90,10 @@ QAbstractItemModel* pvFileDialogModelWrapper::getModel()
 }
 
 
-bool pvFileDialogModelWrapper::dirExists(const QString &dir, QString &fullpath)
+bool pvFileDialogModelWrapper::dirExists(const char* dir, const char* fullPath)
 {
-  return this->Implementation->FileDialogModel->dirExists(dir, fullpath);
+   QString tmpDir = QString(dir);
+   QString tmpFullPath = QString(fullPath);
+  return this->Implementation->FileDialogModel->dirExists(tmpDir, tmpFullPath);
 }
 
