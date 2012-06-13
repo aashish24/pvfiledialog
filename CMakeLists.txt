@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.4 FATAL_ERROR)
 project(pvFileDialogModelWrapper)
 
 # Set search path for cmake modules
-SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake)
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake)
 
 # Only build shared library
 set(BUILD_SHARED_LIBS ON)
@@ -45,6 +45,8 @@ find_package(PythonInterp REQUIRED)
 
 # SIP is required
 find_package(SIP REQUIRED)
+
+message("SIP_EXECUTABLE ${SIP_EXECUTABLE}")
 
 # Find PyQt SIP directory
 find_path(PYQT_SIP_DIR QtCore/qstring.sip

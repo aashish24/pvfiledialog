@@ -24,7 +24,7 @@
 # Redistribution and use is allowed according to the terms of the BSD license.
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
 
-
+message("PYTHON_EXECUTABLE ${PYTHON_EXECUTABLE}")
 
 IF(SIP_VERSION)
   # Already in cache, be silent
