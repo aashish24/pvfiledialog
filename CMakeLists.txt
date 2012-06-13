@@ -40,8 +40,10 @@ target_link_libraries(pvFileDialogModel
   pqComponents
 )
 
-# Python is requird
-find_package(PythonInterp REQUIRED)
+# Python is required
+if(NOT ${PYTHON_EXECUTABLE})
+	find_package(PythonInterp REQUIRED)
+endif()
 
 # SIP is required
 find_package(SIP REQUIRED)
