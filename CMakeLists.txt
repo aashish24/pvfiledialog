@@ -65,13 +65,13 @@ set(PYQT_SIP_FLAGS
 )
 
 if(WIN32)
-  list(APPEND PYQT_SIP_FLAGS "-t" "Qt_4_6_2")
+  list(APPEND PYQT_SIP_FLAGS "-t" "Qt_4_7_0")
   list(APPEND PYQT_SIP_FLAGS "-t" "WS_WIN")
 elseif(APPLE)
-  list(APPEND PYQT_SIP_FLAGS "-t" "Qt_4_7_1")
+  list(APPEND PYQT_SIP_FLAGS "-t" "Qt_4_7_0")
   list(APPEND PYQT_SIP_FLAGS "-t" "WS_MACX")
 else(WIN32)
-  list(APPEND PYQT_SIP_FLAGS "-t" "Qt_4_6_2")
+  list(APPEND PYQT_SIP_FLAGS "-t" "Qt_4_7_0")
   list(APPEND PYQT_SIP_FLAGS "-t" "WS_X11")
 endif(WIN32)
 
