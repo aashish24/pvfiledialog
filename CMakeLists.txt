@@ -41,7 +41,7 @@ target_link_libraries(pvFileDialogModel
 )
 
 # Python is required
-if(NOT ${PYTHON_EXECUTABLE})
+if(NOT PYTHON_EXECUTABLE)
 	find_package(PythonInterp REQUIRED)
 endif()
 
