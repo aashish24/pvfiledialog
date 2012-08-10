@@ -64,8 +64,9 @@ set(PYQT_SIP_FLAGS
     "-o"
 )
 
+# NOTE: http://www.riverbankcomputing.com/pipermail/pyqt/2010-March/026140.html
 set(QT4_SIP_VERSION_STRING
-  "Qt_${QT_VERSION_MAJOR}_${QT_VERSION_MINOR}_${QT_VERSION_PATCH}"
+  "Qt_${QT_VERSION_MAJOR}_${QT_VERSION_MINOR}_0"
 )
 
 list(APPEND PYQT_SIP_FLAGS "-t" ${QT4_SIP_VERSION_STRING})
