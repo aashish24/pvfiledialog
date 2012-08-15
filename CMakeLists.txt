@@ -32,7 +32,11 @@ include_directories(
 
 qt4_wrap_cpp(mocSouces pqSessionFileDialogModel.h pvFileDialogModelWrapper.h)
 
-add_library(pvFileDialogModel ${mocSouces} pqSessionFileDialogModel.cxx pvFileDialogModelWrapper.cxx)
+add_library(pvFileDialogModel SHARED ${mocSouces} pqSessionFileDialogModel.cxx pvFileDialogModelWrapper.cxx)
+# Fow now force .so suffix on MAC OSX and LINUX
+if(NOT WIN32)
+  set_target_properties(pvFileDialogModel PROPERTIES SUFFIX .so)
+endif(NOT WIN32)
 target_link_libraries(pvFileDialogModel
   ${QT_LIBRARIES}
   vtkPVClientServerCore
@@ -126,7 +130,7 @@ include_directories(
   ${QT_INCLUDE_DIR}/QtGui
 )
 
-add_library(pvFileDialogModelWrapper ${outputs})
+add_library(pvFileDialogModelWrapper MODULE ${outputs})
 set_target_properties(pvFileDialogModelWrapper PROPERTIES PREFIX "")
 target_link_libraries(pvFileDialogModelWrapper pvFileDialogModel)
 
