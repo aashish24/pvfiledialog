@@ -21,12 +21,12 @@ include(${VTK_USE_FILE})
 
 # Qt4 is required
 find_package(Qt4 REQUIRED)
+include(${QT_USE_FILE})
 
 # Build pvFileDialogModel
 include_directories(
   ${PARAVIEW_INCLUDE_DIRS}
   ${ParaView_BINARY_DIR}/Qt/Core
-  ${QT_INCLUDE_DIR}
   ${PARAVIEW_GUI_INCLUDE_DIRS}
 )
 
