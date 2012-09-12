@@ -677,12 +677,8 @@ QStringList pqSessionFileDialogModel::buildFileGroup(const QString &filename)
      {
      QModelIndex rowIndex = model->index(row, 0);
 
-     qDebug() << "row is " << row;
-
      for(int column = 0; column < model->columnCount(rowIndex); column++)
        {
-       qDebug() << "column is " << column;
-
        QModelIndex index;
        if(column == 0)
          {
@@ -693,12 +689,7 @@ QStringList pqSessionFileDialogModel::buildFileGroup(const QString &filename)
          index = model->index(0, column, rowIndex);
          }
 
-       qDebug() << "index is " << index;
-
        QString label = model->data(index, Qt::DisplayRole).toString();
-
-       qDebug() << "label is " << label;
-       qDebug() << "filename is " << filename;
 
        // FIXME: I don't understand this
 //       if(filename == label)
@@ -721,11 +712,6 @@ QStringList pqSessionFileDialogModel::buildFileGroup(const QString &filename)
    if(files.empty())
      {
      files.append(this->absoluteFilePath(filename));
-     }
-
-   foreach(QString file, files)
-     {
-     qDebug() << "File is " << file;
      }
 
    return files;
@@ -1114,11 +1100,4 @@ Qt::ItemFlags pqSessionFileDialogModel::flags(const QModelIndex& idx) const
     ret |= Qt::ItemIsEditable;
     }
   return ret;
-}
-
-
-//---------------------------------------------------------------------------
-void pqSessionFileDialogModel::PrintFileList()
-{
-  qDebug() << "FileList size" << this->Implementation->FileList.size();
 }

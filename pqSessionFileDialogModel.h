@@ -137,9 +137,7 @@ public:
   QVariant headerData(int section, Qt::Orientation, int role) const;
 
   /// returns flags for item
-  Qt::ItemFlags flags(const QModelIndex& idx) const;
-
-  void PrintFileList();
+  Qt::ItemFlags flags(const QModelIndex& idx) const;  
 
 private:
   class pqImplementation;
