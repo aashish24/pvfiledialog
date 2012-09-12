@@ -25,7 +25,6 @@ public:
 
   QStringList buildFileGroup(const QString &filename);
 
-
 private:
   class pvFileDialogModelWrapperInternal;
   pvFileDialogModelWrapperInternal *Implementation;

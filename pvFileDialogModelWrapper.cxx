@@ -73,8 +73,12 @@ void pvFileDialogModelWrapper::setCurrentPath(const char* path)
 //-----------------------------------------------------------------------------
 const char* pvFileDialogModelWrapper::absoluteFilePath(const char *path)
 {
-  QString tmpPath = QString(path);
- return this->Implementation->FileDialogModel->absoluteFilePath(tmpPath).toStdString().c_str();
+  QString tmpPath = QString(path);  
+
+  this->Implementation->FileDialogModel->PrintFileList();
+
+  return this->Implementation->FileDialogModel->absoluteFilePath(
+    tmpPath).toStdString().c_str();
 }
 
 //-----------------------------------------------------------------------------
@@ -98,7 +102,7 @@ bool pvFileDialogModelWrapper::dirExists(const char* dir, const char* fullPath)
 }
 
 //-----------------------------------------------------------------------------
-QStringList pvFileDialogModelWrapper::buildFileGroup(const QString &filiename)
+QStringList pvFileDialogModelWrapper::buildFileGroup(const QString &filename)
 {
   return this->Implementation->FileDialogModel->buildFileGroup(filename);
 }

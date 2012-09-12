@@ -139,6 +139,8 @@ public:
   /// returns flags for item
   Qt::ItemFlags flags(const QModelIndex& idx) const;
 
+  void PrintFileList();
+
 private:
   class pqImplementation;
   pqImplementation* const Implementation;
