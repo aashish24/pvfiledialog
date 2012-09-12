@@ -51,6 +51,7 @@ To use, pass a new instance of pqServerFileDialogModel to pqFileDialog object.
 
 \sa pqFileDialog
 */
+//-----------------------------------------------------------------------------
 class PQCORE_EXPORT pqSessionFileDialogModel : public QAbstractItemModel
 {
   typedef QAbstractItemModel base;
@@ -144,7 +145,7 @@ private:
   pqImplementation* const Implementation;
 };
 
-
+//-----------------------------------------------------------------------------
 class pqFileDialogModelIconProvider : protected QFileIconProvider
 {
 public:

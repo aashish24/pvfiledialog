@@ -476,52 +476,6 @@ public:
   }
 
   //---------------------------------------------------------------------------
-  QStringList buildFileGroup(const QString &filename)
-  {
-    QStringList files;
-
-//    // if we find the file passed in is the parent of a group,
-//    // add the entire group to the return QList
-//    QAbstractProxyModel *model = &this->Implementation->FileFilter;
-
-//    for(int row = 0; row < model->rowCount(); row++)
-//    {
-//      QModelIndex rowIndex = model->index(row, 0);
-
-//      for(int column = 0; column < model->columnCount(rowIndex); column++)
-//      {
-//        QModelIndex index;
-//        if(column == 0)
-//        {
-//          index = rowIndex;
-//        }
-//        else
-//        {
-//          index = model->index(0, column, rowIndex);
-//        }
-
-//        QString label = model->data(index, Qt::DisplayRole).toString();
-
-//        if(filename == label)
-//        {
-//          if(column == 0)
-//          {
-//            QModelIndex sourceIndex = model->mapToSource(index);
-//            files += this->Implementation->Model->getFilePaths(sourceIndex);
-//          }
-//          else
-//          {
-//            // UserRole will return the full file path
-//            files += model->data(index, Qt::UserRole).toString();
-//          }
-//        }
-//      }
-//    }
-
-    return files;
-  }
-
-  //---------------------------------------------------------------------------
   bool isHidden(const QModelIndex& Index)
   {
     const int size = this->FileList.size();
@@ -1013,7 +967,8 @@ QModelIndex pqSessionFileDialogModel::parent(const QModelIndex& idx) const
     return QModelIndex();
   }
 
-  const pqFileDialogModelFileInfo* ptr = reinterpret_cast<pqFileDialogModelFileInfo*>(idx.internalPointer());
+  const pqFileDialogModelFileInfo* ptr =
+    reinterpret_cast<pqFileDialogModelFileInfo*>(idx.internalPointer());
   int row = ptr - &this->Implementation->FileList.first();
   return this->createIndex(row, idx.column());
 }

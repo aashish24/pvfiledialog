@@ -73,9 +73,7 @@ void pvFileDialogModelWrapper::setCurrentPath(const char* path)
 //-----------------------------------------------------------------------------
 const char* pvFileDialogModelWrapper::absoluteFilePath(const char *path)
 {
-  QString tmpPath = QString(path);  
-
-  this->Implementation->FileDialogModel->PrintFileList();
+  QString tmpPath = QString(path);
 
   return this->Implementation->FileDialogModel->absoluteFilePath(
     tmpPath).toStdString().c_str();
