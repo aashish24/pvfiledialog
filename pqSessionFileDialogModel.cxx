@@ -67,8 +67,8 @@ class pqFileDialogModelFileInfo
 public:
   //---------------------------------------------------------------------------
   pqFileDialogModelFileInfo()
-    {
-    }
+  {
+  }
 
   //---------------------------------------------------------------------------
   pqFileDialogModelFileInfo(const QString& l, const QString& filepath,
@@ -80,44 +80,44 @@ public:
     Type(t),
     Hidden(h),
     Group(g)
-    {
-    }
+  {
+  }
 
   //---------------------------------------------------------------------------
   const QString& label() const
-    {
+  {
     return this->Label;
-    }
+  }
 
   //---------------------------------------------------------------------------
   const QString& filePath() const
-    {
+  {
     return this->FilePath;
-    }
+  }
 
   //---------------------------------------------------------------------------
   vtkPVFileInformation::FileTypes type() const
-    {
+  {
     return this->Type;
-    }
+  }
 
   //---------------------------------------------------------------------------
   bool isGroup() const
-    {
+  {
     return !this->Group.empty();
-    }
+  }
 
   //---------------------------------------------------------------------------
   bool isHidden() const
-    {
+  {
     return this->Hidden;
-    }
+  }
 
   //---------------------------------------------------------------------------
   const QList<pqFileDialogModelFileInfo>& group() const
-    {
+  {
     return this->Group;
-    }
+  }
 
 private:
   QString Label;
@@ -144,7 +144,7 @@ pqFileDialogModelIconProvider::pqFileDialogModelIconProvider()
 QIcon pqFileDialogModelIconProvider::icon(IconType t) const
 {
   switch(t)
-    {
+  {
     case Computer:
       return QFileIconProvider::icon(QFileIconProvider::Computer);
     case Drive:
@@ -163,7 +163,7 @@ QIcon pqFileDialogModelIconProvider::icon(IconType t) const
       return this->NetworkIcon;
     case NetworkDomain:
       return this->DomainIcon;
-    }
+  }
   return QIcon();
 }
 
@@ -171,33 +171,33 @@ QIcon pqFileDialogModelIconProvider::icon(IconType t) const
 QIcon pqFileDialogModelIconProvider::icon(vtkPVFileInformation::FileTypes f) const
 {
   if(f == vtkPVFileInformation::DIRECTORY_LINK)
-    {
+  {
     return icon(pqFileDialogModelIconProvider::FolderLink);
-    }
+  }
   else if(f == vtkPVFileInformation::SINGLE_FILE_LINK)
-    {
+  {
     return icon(pqFileDialogModelIconProvider::FileLink);
-    }
+  }
   else if(f == vtkPVFileInformation::NETWORK_SHARE)
-    {
+  {
     return icon(pqFileDialogModelIconProvider::NetworkFolder);
-    }
+  }
   else if(f == vtkPVFileInformation::NETWORK_SERVER)
-    {
+  {
     return icon(pqFileDialogModelIconProvider::Computer);
-    }
+  }
   else if(f == vtkPVFileInformation::NETWORK_DOMAIN)
-    {
+  {
     return icon(pqFileDialogModelIconProvider::NetworkDomain);
-    }
+  }
   else if(f == vtkPVFileInformation::NETWORK_ROOT)
-    {
+  {
     return icon(pqFileDialogModelIconProvider::NetworkRoot);
-    }
+  }
   else if(vtkPVFileInformation::IsDirectory(f))
-    {
+  {
     return icon(pqFileDialogModelIconProvider::Folder);
-    }
+  }
   return icon(pqFileDialogModelIconProvider::File);
 }
 
@@ -271,7 +271,7 @@ public:
 
     // if we are doing remote browsing
     if(session)
-      {      
+    {
       // vtkSMProxyManager
 //      vtkSMSessionProxyManager* pxm = session->GetSessionProxyManager();
 //      vtkSMProxyManager* pxm = server->proxyManager();
@@ -286,14 +286,14 @@ public:
       QString separator = pqSMAdaptor::getElementProperty(
         helper->GetProperty("PathSeparator")).toString();
       this->Separator = separator.toAscii().data()[0];
-      }
+    }
     else
-      {
+    {
       vtkPVFileInformationHelper* helper = vtkPVFileInformationHelper::New();
       this->FileInformationHelper = helper;
       helper->Delete();
       this->Separator = helper->GetPathSeparator()[0];
-      }
+    }
 
     this->FileInformation.TakeReference(vtkPVFileInformation::New());
 
@@ -462,7 +462,7 @@ public:
       pqFileDialogModelFileInfo& file = this->FileList[Index.row()];
       if (file.isGroup() && file.group().count()>0)
       {
-        for (int i=0; i<file.group().count();i++)
+        for (int i = 0; i < file.group().count(); i++)
         {
           results.push_back(file.group().at(i).filePath());
         }
@@ -523,23 +523,23 @@ public:
 
   //---------------------------------------------------------------------------
   bool isHidden(const QModelIndex& Index)
-    {
+  {
     const int size = this->FileList.size();
     if(Index.row() >= size)
       return false;
 
     QModelIndex p = Index.parent();
     if ( p.isValid() && p.row() < size)
-      {
+    {
       pqFileDialogModelFileInfo& file = this->FileList[p.row()];
       const QList<pqFileDialogModelFileInfo>& grp = file.group();
       if(Index.row() < grp.size())
-        {
+      {
         return grp[Index.row()].isHidden();
-        }
       }
-    return this->FileList[Index.row()].isHidden();
     }
+    return this->FileList[Index.row()].isHidden();
+  }
 
   //---------------------------------------------------------------------------
   bool isDir(const QModelIndex& Index)
@@ -565,25 +565,25 @@ public:
 
   //---------------------------------------------------------------------------
   const pqFileDialogModelFileInfo* infoForIndex(const QModelIndex& idx) const
-    {
+  {
     if(idx.isValid() &&
        NULL == idx.internalPointer() &&
        idx.row() >= 0 &&
        idx.row() < this->FileList.size())
-      {
+    {
       return &this->FileList[idx.row()];
-      }
+    }
     else if(idx.isValid() && idx.internalPointer())
-      {
+    {
       pqFileDialogModelFileInfo* ptr = reinterpret_cast<pqFileDialogModelFileInfo*>(idx.internalPointer());
       const QList<pqFileDialogModelFileInfo>& grp = ptr->group();
       if(idx.row() >= 0 && idx.row() < grp.size())
-        {
+      {
         return &grp[idx.row()];
-        }
       }
-    return NULL;
     }
+    return NULL;
+  }
 
   /// Path separator for the connected server's filesystem.
   char Separator;
@@ -646,9 +646,9 @@ QString pqSessionFileDialogModel::getCurrentPath()
 QString pqSessionFileDialogModel::absoluteFilePath(const QString& path)
 {
   if(path.isEmpty())
-    {
+  {
     return QString();
-    }
+  }
 
   vtkPVFileInformation* info;
   info = this->Implementation->GetData(false, path, false);
@@ -659,9 +659,9 @@ QString pqSessionFileDialogModel::absoluteFilePath(const QString& path)
 QStringList pqSessionFileDialogModel::getFilePaths(const QModelIndex& Index)
 {
   if(Index.model() == this)
-    {
+  {
     return this->Implementation->getFilePaths(Index);
-    }
+  }
   return QStringList();
 }
 
@@ -674,20 +674,20 @@ QStringList pqSessionFileDialogModel::buildFileGroup(const QString &filename)
   QAbstractItemModel *model = this;
 
    for(int row = 0; row < model->rowCount(); row++)
-     {
+    {
      QModelIndex rowIndex = model->index(row, 0);
 
      for(int column = 0; column < model->columnCount(rowIndex); column++)
-       {
+      {
        QModelIndex index;
        if(column == 0)
-         {
+        {
          index = rowIndex;
-         }
+        }
        else
-         {
+        {
          index = model->index(0, column, rowIndex);
-         }
+        }
 
        QString label = model->data(index, Qt::DisplayRole).toString();
 
@@ -695,24 +695,24 @@ QStringList pqSessionFileDialogModel::buildFileGroup(const QString &filename)
 //       if(filename == label)
          {
          if(column == 0)
-           {
+          {
              // FIXME: I don't think this is required
 //           QModelIndex sourceIndex = model->mapToSource(index);
 //           files += this->getFilePaths(sourceIndex);
-           }
+          }
          else
-           {
+          {
            // UserRole will return the full file path
            files += model->data(index, Qt::UserRole).toString();
-           }
-         }
-       }
-     }
+          }
+        }
+      }
+    }
 
    if(files.empty())
-     {
+   {
      files.append(this->absoluteFilePath(filename));
-     }
+   }
 
    return files;
 }
@@ -745,15 +745,15 @@ bool pqSessionFileDialogModel::fileExists(const QString& file, QString& fullpath
 
   // try again for shortcut
   if(info->GetType() != vtkPVFileInformation::SINGLE_FILE)
-    {
+  {
     info = this->Implementation->GetData(false, FilePath + ".lnk", false);
-    }
+  }
 
   if(info->GetType() == vtkPVFileInformation::SINGLE_FILE)
-    {
+  {
     fullpath = info->GetFullPath();
     return true;
-    }
+  }
   return false;
 }
 
@@ -763,14 +763,14 @@ bool pqSessionFileDialogModel::mkdir(const QString& dirName)
   QString path;
   QString dirPath = this->absoluteFilePath(dirName);
   if(this->dirExists(dirPath,path))
-    {
+  {
     return false;
-    }
+  }
 
   bool ret = false;
 
   if (this->Implementation->isRemote())
-    {
+  {
     vtkSMDirectoryProxy* dirProxy =
         vtkSMDirectoryProxy::SafeDownCast(
             this->Implementation->GetProxyManager()->NewProxy(
@@ -778,12 +778,12 @@ bool pqSessionFileDialogModel::mkdir(const QString& dirName)
     ret = dirProxy->MakeDirectory(dirPath.toAscii().data(),
       vtkProcessModule::DATA_SERVER);
     dirProxy->Delete();
-    }
+  }
   else
-    {
+  {
     // File system is local.
     ret = (vtkDirectory::MakeDirectory(dirPath.toAscii().data()) != 0);
-    }
+  }
 
   QString cPath = this->Implementation->cleanPath(this->getCurrentPath());
   vtkPVFileInformation* info;
@@ -801,14 +801,14 @@ bool pqSessionFileDialogModel::rmdir(const QString& dirName)
   QString path;
   QString dirPath = this->absoluteFilePath(dirName);
   if(!this->dirExists(dirPath,path))
-    {
+  {
     return false;
-    }
+  }
 
   bool ret = false;
 
   if (this->Implementation->isRemote())
-    {
+  {
     vtkSMDirectoryProxy* dirProxy =
         vtkSMDirectoryProxy::SafeDownCast(
             this->Implementation->GetProxyManager()->NewProxy(
@@ -816,12 +816,12 @@ bool pqSessionFileDialogModel::rmdir(const QString& dirName)
     ret = dirProxy->DeleteDirectory(dirPath.toAscii().data(),
       vtkProcessModule::DATA_SERVER);
     dirProxy->Delete();
-    }
+  }
   else
-    {
+  {
     // File system is local.
     ret = (vtkDirectory::DeleteDirectory(dirPath.toAscii().data()) != 0);
-    }
+  }
 
   QString cPath = this->Implementation->cleanPath(this->getCurrentPath());
   vtkPVFileInformation* info;
@@ -840,9 +840,9 @@ bool pqSessionFileDialogModel::rename(const QString& oldname, const QString& new
   QString newPath = this->absoluteFilePath(newname);
 
   if(oldPath == newPath)
-    {
+  {
     return true;
-    }
+  }
 
   vtkPVFileInformation* info;
   info = this->Implementation->GetData(false, oldPath, false);
@@ -851,24 +851,24 @@ bool pqSessionFileDialogModel::rename(const QString& oldname, const QString& new
 
   if(oldType != vtkPVFileInformation::SINGLE_FILE &&
     !vtkPVFileInformation::IsDirectory(oldType))
-    {
+  {
     return false;
-    }
+  }
 
   // don't replace file/dir
   info = this->Implementation->GetData(false, newPath, false);
   if(info->GetType() == oldType)
-    {
+  {
     QString message("Cannot rename to %1, which already exists");
     message = message.arg(newname);
     QMessageBox::warning(NULL, "Error renaming", message);
     return false;
-    }
+  }
 
   bool ret = false;
 
   if (this->Implementation->isRemote())
-    {
+  {
     vtkSMDirectoryProxy* dirProxy =
         vtkSMDirectoryProxy::SafeDownCast(
             this->Implementation->GetProxyManager()->NewProxy(
@@ -877,12 +877,12 @@ bool pqSessionFileDialogModel::rename(const QString& oldname, const QString& new
       oldPath.toAscii().data(), newPath.toAscii().data(),
       vtkProcessModule::DATA_SERVER);
     dirProxy->Delete();
-    }
+  }
   else
-    {
+  {
     ret = (vtkDirectory::Rename(oldPath.toAscii().data(),
                                 newPath.toAscii().data()) != 0);
-    }
+  }
 
   QString cPath = this->Implementation->cleanPath(this->getCurrentPath());
   info = this->Implementation->GetData(true, cPath, false);
@@ -902,15 +902,15 @@ bool pqSessionFileDialogModel::dirExists(const QString& path, QString& fullpath)
 
   // try again for shortcuts
   if(!vtkPVFileInformation::IsDirectory(info->GetType()))
-    {
+  {
     info = this->Implementation->GetData(false, dir + ".lnk", false);
-    }
+  }
 
   if(vtkPVFileInformation::IsDirectory(info->GetType()))
-    {
+  {
     fullpath = info->GetFullPath();
     return true;
-    }
+  }
   return false;
 }
 
@@ -927,10 +927,10 @@ int pqSessionFileDialogModel::columnCount(const QModelIndex& idx) const
     this->Implementation->infoForIndex(idx);
 
   if(!file)
-    {
+  {
     // should never get here anyway
     return 1;
-    }
+  }
 
   return file->group().size() + 1;
 }
@@ -942,46 +942,46 @@ QVariant pqSessionFileDialogModel::data(const QModelIndex &idx, int role) const
   const pqFileDialogModelFileInfo *file;
 
   if(idx.column() == 0)
-    {
+  {
     file = this->Implementation->infoForIndex(idx);
-    }
+  }
   else
-    {
+   {
     file = this->Implementation->infoForIndex(idx.parent());
-    }
+   }
 
   if(!file)
-    {
+  {
     // should never get here anyway
     return QVariant();
-    }
+  }
 
   if(role == Qt::DisplayRole || role == Qt::EditRole)
-    {
+  {
     if (idx.column() == 0)
-      {
+    {
       return file->label();
-      }
+    }
     else if (idx.column() <= file->group().size())
-      {
+    {
       return file->group().at(idx.column()-1).label();
-      }
     }
+  }
   else if(role == Qt::UserRole)
-    {
+  {
     if (idx.column() == 0)
-      {
-      return file->filePath();
-      }
-    else if (idx.column() <= file->group().size())
-      {
-      return file->group().at(idx.column()-1).filePath();
-      }
-    }
-  else if(role == Qt::DecorationRole && idx.column() == 0)
     {
-    return Icons()->icon(file->type());
+      return file->filePath();
     }
+    else if (idx.column() <= file->group().size())
+    {
+      return file->group().at(idx.column()-1).filePath();
+    }
+  }
+  else if(role == Qt::DecorationRole && idx.column() == 0)
+  {
+    return Icons()->icon(file->type());
+  }
 
   return QVariant();
 }
@@ -991,16 +991,16 @@ QModelIndex pqSessionFileDialogModel::index(int row, int column,
                                      const QModelIndex& p) const
 {
   if(!p.isValid())
-    {
+  {
     return this->createIndex(row, column);
-    }
+  }
   if(p.row() >= 0 &&
      p.row() < this->Implementation->FileList.size() &&
      NULL == p.internalPointer())
-    {
+  {
     pqFileDialogModelFileInfo* fi = &this->Implementation->FileList[p.row()];
     return this->createIndex(row, column, fi);
-    }
+  }
 
   return QModelIndex();
 }
@@ -1009,9 +1009,9 @@ QModelIndex pqSessionFileDialogModel::index(int row, int column,
 QModelIndex pqSessionFileDialogModel::parent(const QModelIndex& idx) const
 {
   if(!idx.isValid() || !idx.internalPointer())
-    {
+  {
     return QModelIndex();
-    }
+  }
 
   const pqFileDialogModelFileInfo* ptr = reinterpret_cast<pqFileDialogModelFileInfo*>(idx.internalPointer());
   int row = ptr - &this->Implementation->FileList.first();
@@ -1022,16 +1022,16 @@ QModelIndex pqSessionFileDialogModel::parent(const QModelIndex& idx) const
 int pqSessionFileDialogModel::rowCount(const QModelIndex& idx) const
 {
   if(!idx.isValid())
-    {
+  {
     return this->Implementation->FileList.size();
-    }
+  }
 
   if(NULL == idx.internalPointer() &&
      idx.row() >= 0 &&
      idx.row() < this->Implementation->FileList.size())
-    {
+  {
     return this->Implementation->FileList[idx.row()].group().size();
-    }
+  }
 
   return 0;
 }
@@ -1045,9 +1045,9 @@ bool pqSessionFileDialogModel::hasChildren(const QModelIndex& idx) const
   if(NULL == idx.internalPointer() &&
      idx.row() >= 0 &&
      idx.row() < this->Implementation->FileList.size())
-    {
+  {
     return this->Implementation->FileList[idx.row()].isGroup();
-    }
+  }
 
   return false;
 }
@@ -1057,14 +1057,14 @@ QVariant pqSessionFileDialogModel::headerData(int section,
                                        Qt::Orientation, int role) const
 {
   switch(role)
-    {
+  {
   case Qt::DisplayRole:
     switch(section)
-      {
+    {
     case 0:
       return tr("Filename");
-      }
     }
+  }
 
   return QVariant();
 }
@@ -1073,17 +1073,17 @@ QVariant pqSessionFileDialogModel::headerData(int section,
 bool pqSessionFileDialogModel::setData(const QModelIndex& idx, const QVariant& value, int role)
 {
   if(role != Qt::DisplayRole && role != Qt::EditRole)
-    {
+  {
     return false;
-    }
+  }
 
   const pqFileDialogModelFileInfo* file =
     this->Implementation->infoForIndex(idx);
 
   if(!file)
-    {
+  {
     return false;
-    }
+  }
 
   QString name = value.toString();
   return this->rename(file->filePath(), name);
@@ -1096,8 +1096,8 @@ Qt::ItemFlags pqSessionFileDialogModel::flags(const QModelIndex& idx) const
   const pqFileDialogModelFileInfo* file =
     this->Implementation->infoForIndex(idx);
   if(file && !file->isGroup())
-    {
+  {
     ret |= Qt::ItemIsEditable;
-    }
+  }
   return ret;
 }
