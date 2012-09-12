@@ -23,6 +23,8 @@ public:
 
   bool dirExists(const char *dir, const char *fullpath);
 
+  QStringList buildFileGroup(const QString &filename);
+
 
 private:
   class pvFileDialogModelWrapperInternal;

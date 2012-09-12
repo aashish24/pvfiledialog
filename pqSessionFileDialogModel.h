@@ -104,6 +104,9 @@ public:
   /// this also resolved symlinks if necessary
   QStringList getFilePaths(const QModelIndex&);
 
+  ///
+  QStringList buildFileGroup(const QString &filename);
+
   /// Returns the server that this model is browsing
   vtkSMSession* session() const;
 
@@ -114,18 +117,25 @@ public:
 
   /// return the number of columns in the model
   int columnCount(const QModelIndex&) const;
+
   /// return the data for an item
   QVariant data(const QModelIndex & idx, int role) const;
+
   /// return an index from another index
   QModelIndex index(int row, int column, const QModelIndex&) const;
+
   /// return the parent index of an index
   QModelIndex parent(const QModelIndex&) const;
+
   /// return the number of rows under a given index
   int rowCount(const QModelIndex&) const;
+
   /// return whether a given index has children
   bool hasChildren(const QModelIndex& p) const;
+
   /// returns header data
   QVariant headerData(int section, Qt::Orientation, int role) const;
+
   /// returns flags for item
   Qt::ItemFlags flags(const QModelIndex& idx) const;
 
